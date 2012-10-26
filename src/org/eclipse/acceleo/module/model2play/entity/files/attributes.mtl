@@ -1,0 +1,16 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module attributes.
+ */]
+[module attributes('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param anAttribute
+ */]
+[template public genAttributes(anAttribute : Attribute)]
+
+public String [anAttribute.name/];
+
+[/template]
