@@ -11,7 +11,7 @@
  */]
 [template public generateElement(myEntity : Entity)]
 [comment @main/]
-[file (myEntity.name.concat('.java'), false, 'UTF-8')]
+[file (myEntity.name.concat('Model.java'), false, 'UTF-8')]
 
 public class [myEntity.name/] extends Model {
 
