@@ -3,7 +3,9 @@
  * The documentation of the module generate.
  */]
 [module generate('http://www.obeonetwork.org/dsl/entity/2.0.0')]
-[import org::eclipse::acceleo::module::model2play::entity::files::attributes /]
+[import org::eclipse::acceleo::module::model2play::entity::common::attributes /]
+[import org::eclipse::acceleo::module::model2play::entity::common::references /]
+
 
 [**
  * The documentation of the template generateElement.
@@ -13,11 +15,24 @@
 [comment @main/]
 [file (myEntity.name.concat('Model.java'), false, 'UTF-8')]
 
-public class [myEntity.name/] extends Model {
+@Entity
+public class [myEntity.name/]Model extends Model {
+
+[comment trouver un moyen de checker une liste d'un coup /]
+[if (false)]
+@Id
+@Constraints.Min(10)
+public Long id;
+[/if]
 
 [for(myEntity.attributes)]
 	[comment Call the file block in 'attributes' /]
 	[ genAttributes() /]
+[/for]
+
+[for(myEntity.references)]
+	[comment Call the file block in 'attributes' /]
+	[ genReferences() /]
 [/for]
 
 

@@ -10,7 +10,9 @@
  */]
 [template public genAttributes(anAttribute : Attribute)]
 
-
-public String [anAttribute.name/];
+[if(anAttribute.isPrimaryKey)]
+@Id
+[/if]
+public [anAttribute.type.name/] [anAttribute.name/];
 
 [/template]

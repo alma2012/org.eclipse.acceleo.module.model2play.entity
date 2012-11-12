@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
-  <mtl:Module name="generate" nsURI="org::eclipse::acceleo::module::model2play::entity::main::generate" startHeaderPosition="83" endHeaderPosition="225">
+  <mtl:Module name="generate" nsURI="org::eclipse::acceleo::module::model2play::entity::main::generate" startHeaderPosition="83" endHeaderPosition="226">
     <documentation xsi:type="mtl:ModuleDocumentation">
       <body startPosition="32" endPosition="80" value="&#xA;The documentation of the module generate.&#xA;&#xA;"/>
     </documentation>
@@ -8,10 +8,11 @@
       <takesTypesFrom href="http://www.obeonetwork.org/dsl/entity/2.0.0#/"/>
       <takesTypesFrom href="http://www.obeonetwork.org/dsl/entity/2.0.0#//extensionUtilities"/>
     </input>
-    <imports href="../files/attributes.emtl#/0"/>
+    <imports href="../common/attributes.emtl#/0"/>
+    <imports href="../common/references.emtl#/0"/>
     <ownedModuleElement xsi:type="mtl:Template" name="generateElement" visibility="Public" main="true">
       <body xsi:type="mtl:FileBlock" openMode="OverWrite">
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;public class "/>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;@Entity&#xA;public class "/>
         <body xsi:type="ocl.ecore:PropertyCallExp">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <source xsi:type="ocl.ecore:VariableExp" name="myEntity" referredVariable="/0/generateElement/myEntity">
@@ -19,22 +20,47 @@
           </source>
           <referredProperty xsi:type="ecore:EAttribute" href="http://www.obeonetwork.org/dsl/environment/2.0.0#//Type/name"/>
         </body>
-        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" extends Model {&#xA;&#xA;"/>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Model extends Model {&#xA;&#xA;"/>
+        <body xsi:type="mtl:IfBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="@Id&#xA;@Constraints.Min(10)&#xA;public Long id;&#xA;"/>
+          <ifExpr xsi:type="ocl.ecore:BooleanLiteralExp" booleanSymbol="false">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          </ifExpr>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
         <body xsi:type="mtl:ForBlock">
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;"/>
           <body xsi:type="mtl:TemplateInvocation">
             <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-            <definition href="../files/attributes.emtl#/0/genAttributes"/>
-            <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/12">
+            <definition href="../common/attributes.emtl#/0/genAttributes"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/13">
               <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Attribute"/>
             </argument>
           </body>
           <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
-          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/9/OrderedSet(Attribute)">
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/10/OrderedSet(Attribute)">
             <source xsi:type="ocl.ecore:VariableExp" name="myEntity" referredVariable="/0/generateElement/myEntity">
               <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
             </source>
             <referredProperty xsi:type="ecore:EReference" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity/attributes"/>
+          </iterSet>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;"/>
+          <body xsi:type="mtl:TemplateInvocation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <definition href="../common/references.emtl#/0/genReferences"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/18">
+              <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/10/OrderedSet(Reference)">
+            <source xsi:type="ocl.ecore:VariableExp" name="myEntity" referredVariable="/0/generateElement/myEntity">
+              <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity/references"/>
           </iterSet>
         </body>
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;};&#xA;"/>
@@ -57,7 +83,7 @@
         </charset>
       </body>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="232" endPosition="311" value="&#xA;The documentation of the template generateElement.&#xA;@param anAttribute&#xA;&#xA;"/>
+        <body startPosition="315" endPosition="394" value="&#xA;The documentation of the template generateElement.&#xA;@param anAttribute&#xA;&#xA;"/>
         <parametersDocumentation name="anAttribute">
           <body value=""/>
         </parametersDocumentation>
@@ -102,11 +128,23 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="../files/attributes.emtl#/0/genAttributes"/>
+          <references href="../common/attributes.emtl#/0/genAttributes"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="anAttribute">
           <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Attribute"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="genReferences">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="../common/references.emtl#/0/genReferences"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aReference">
+          <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
         </eParameters>
       </eOperations>
     </eClassifiers>
@@ -140,6 +178,11 @@
         <references href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Attribute"/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Reference_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
+      </eAnnotations>
+    </eClassifiers>
   </ecore:EPackage>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -162,9 +205,15 @@
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
   </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
+  </ocl.ecore:Variable>
   <ecore:EPackage name="collections">
     <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Attribute)" instanceClassName="java.util.LinkedHashSet">
       <elementType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Attribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Reference)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
     </eClassifiers>
   </ecore:EPackage>
   <ocl.ecore:Variable name="self">
@@ -183,6 +232,21 @@
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Reference"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.obeonetwork.org/dsl/entity/2.0.0#//Entity"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </ocl.ecore:Variable>
   <ecore:EAnnotation source="positions">
@@ -192,114 +256,174 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateElement">
-      <details key="start" value="314"/>
-      <details key="end" value="621"/>
-      <details key="line" value="12"/>
-    </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/generateElement/@body.0">
-      <details key="start" value="384"/>
-      <details key="end" value="609"/>
+      <details key="start" value="397"/>
+      <details key="end" value="944"/>
       <details key="line" value="14"/>
     </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateElement/@body.0">
+      <details key="start" value="467"/>
+      <details key="end" value="932"/>
+      <details key="line" value="16"/>
+    </eAnnotations>
     <eAnnotations source="positions.3" references="/0/generateElement/@body.0/@body.0">
-      <details key="start" value="444"/>
-      <details key="end" value="458"/>
-      <details key="line" value="15"/>
+      <details key="start" value="527"/>
+      <details key="end" value="549"/>
+      <details key="line" value="17"/>
     </eAnnotations>
     <eAnnotations source="positions.4" references="/0/generateElement/@body.0/@body.1">
-      <details key="start" value="459"/>
-      <details key="end" value="472"/>
+      <details key="start" value="550"/>
+      <details key="end" value="563"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.5" references="/0/generateElement/@body.0/@body.1/myEntity">
-      <details key="start" value="459"/>
-      <details key="end" value="467"/>
+      <details key="start" value="550"/>
+      <details key="end" value="558"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.6" references="/0/generateElement/@body.0/@body.2">
-      <details key="start" value="474"/>
-      <details key="end" value="492"/>
-      <details key="line" value="16"/>
+      <details key="start" value="565"/>
+      <details key="end" value="588"/>
+      <details key="line" value="19"/>
     </eAnnotations>
     <eAnnotations source="positions.7" references="/0/generateElement/@body.0/@body.3">
-      <details key="start" value="492"/>
-      <details key="end" value="596"/>
-      <details key="line" value="18"/>
-    </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/generateElement/@body.0/@body.3/@body.0">
-      <details key="start" value="568"/>
-      <details key="end" value="569"/>
-      <details key="line" value="20"/>
-    </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/generateElement/@body.0/@body.3/@body.1">
-      <details key="start" value="571"/>
-      <details key="end" value="586"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/generateElement/@body.0/@body.3/@body.1/self">
-      <details key="start" value="-1"/>
-      <details key="end" value="-1"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/generateElement/@body.0/@body.3/@body.2">
-      <details key="start" value="589"/>
-      <details key="end" value="590"/>
-      <details key="line" value="21"/>
-    </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/generateElement/@body.0/@body.3/@iterSet">
-      <details key="start" value="497"/>
-      <details key="end" value="516"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/generateElement/@body.0/@body.3/@iterSet/myEntity">
-      <details key="start" value="497"/>
-      <details key="end" value="505"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/generateElement/@body.0/@body.4">
-      <details key="start" value="597"/>
-      <details key="end" value="602"/>
+      <details key="start" value="648"/>
+      <details key="end" value="707"/>
       <details key="line" value="22"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/generateElement/@body.0/@fileUrl">
-      <details key="start" value="391"/>
-      <details key="end" value="425"/>
+    <eAnnotations source="positions.8" references="/0/generateElement/@body.0/@body.3/@body.0">
+      <details key="start" value="661"/>
+      <details key="end" value="702"/>
+      <details key="line" value="23"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateElement/@body.0/@body.3/@ifExpr">
+      <details key="start" value="652"/>
+      <details key="end" value="659"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/generateElement/@body.0/@fileUrl/@source">
-      <details key="start" value="391"/>
-      <details key="end" value="404"/>
+    <eAnnotations source="positions.10" references="/0/generateElement/@body.0/@body.4">
+      <details key="start" value="708"/>
+      <details key="end" value="709"/>
+      <details key="line" value="27"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateElement/@body.0/@body.5">
+      <details key="start" value="709"/>
+      <details key="end" value="813"/>
+      <details key="line" value="28"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateElement/@body.0/@body.5/@body.0">
+      <details key="start" value="785"/>
+      <details key="end" value="786"/>
+      <details key="line" value="30"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateElement/@body.0/@body.5/@body.1">
+      <details key="start" value="788"/>
+      <details key="end" value="803"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/generateElement/@body.0/@fileUrl/@source/myEntity">
-      <details key="start" value="391"/>
-      <details key="end" value="399"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/generateElement/@body.0/@fileUrl/@argument.0">
-      <details key="start" value="412"/>
-      <details key="end" value="424"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/generateElement/@body.0/@charset">
-      <details key="start" value="434"/>
-      <details key="end" value="441"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/generateElement/@documentation">
-      <details key="start" value="229"/>
-      <details key="end" value="313"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/generateElement/@documentation/anAttribute">
+    <eAnnotations source="positions.14" references="/0/generateElement/@body.0/@body.5/@body.1/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/generateElement/myEntity">
-      <details key="start" value="347"/>
-      <details key="end" value="364"/>
-      <details key="line" value="12"/>
+    <eAnnotations source="positions.15" references="/0/generateElement/@body.0/@body.5/@body.2">
+      <details key="start" value="806"/>
+      <details key="end" value="807"/>
+      <details key="line" value="31"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateElement/@body.0/@body.5/@iterSet">
+      <details key="start" value="714"/>
+      <details key="end" value="733"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateElement/@body.0/@body.5/@iterSet/myEntity">
+      <details key="start" value="714"/>
+      <details key="end" value="722"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateElement/@body.0/@body.6">
+      <details key="start" value="814"/>
+      <details key="end" value="815"/>
+      <details key="line" value="32"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateElement/@body.0/@body.7">
+      <details key="start" value="815"/>
+      <details key="end" value="919"/>
+      <details key="line" value="33"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateElement/@body.0/@body.7/@body.0">
+      <details key="start" value="891"/>
+      <details key="end" value="892"/>
+      <details key="line" value="35"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateElement/@body.0/@body.7/@body.1">
+      <details key="start" value="894"/>
+      <details key="end" value="909"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateElement/@body.0/@body.7/@body.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateElement/@body.0/@body.7/@body.2">
+      <details key="start" value="912"/>
+      <details key="end" value="913"/>
+      <details key="line" value="36"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateElement/@body.0/@body.7/@iterSet">
+      <details key="start" value="820"/>
+      <details key="end" value="839"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateElement/@body.0/@body.7/@iterSet/myEntity">
+      <details key="start" value="820"/>
+      <details key="end" value="828"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateElement/@body.0/@body.8">
+      <details key="start" value="920"/>
+      <details key="end" value="925"/>
+      <details key="line" value="37"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateElement/@body.0/@fileUrl">
+      <details key="start" value="474"/>
+      <details key="end" value="508"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateElement/@body.0/@fileUrl/@source">
+      <details key="start" value="474"/>
+      <details key="end" value="487"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateElement/@body.0/@fileUrl/@source/myEntity">
+      <details key="start" value="474"/>
+      <details key="end" value="482"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateElement/@body.0/@fileUrl/@argument.0">
+      <details key="start" value="495"/>
+      <details key="end" value="507"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateElement/@body.0/@charset">
+      <details key="start" value="517"/>
+      <details key="end" value="524"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateElement/@documentation">
+      <details key="start" value="312"/>
+      <details key="end" value="396"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateElement/@documentation/anAttribute">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/generateElement/myEntity">
+      <details key="start" value="430"/>
+      <details key="end" value="447"/>
+      <details key="line" value="14"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>
