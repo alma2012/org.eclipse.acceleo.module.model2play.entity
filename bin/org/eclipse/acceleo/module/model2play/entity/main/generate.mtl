@@ -1,0 +1,26 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module generate('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+[import org::eclipse::acceleo::module::model2play::entity::files::attributes /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param anAttribute
+ */]
+[template public generateElement(myEntity : Entity)]
+[comment @main/]
+[file (myEntity.name.concat('Model.java'), false, 'UTF-8')]
+
+public class [myEntity.name/] extends Model {
+
+[for(myEntity.attributes)]
+	[comment Call the file block in 'attributes' /]
+	[ genAttributes() /]
+[/for]
+
+
+};
+[/file]
+[/template]

@@ -1,0 +1,18 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module attributes.
+ */]
+[module getters('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param anAttribute
+ */]
+[template public genGetteurs(anAttribute : Attribute)]
+
+     public [anAttribute.type.name/] get[anAttribute.name.toUpperFirst()/]() {
+       return this.[anAttribute.name/];
+     }   
+
+[/template]
