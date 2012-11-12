@@ -3,6 +3,8 @@
  * The documentation of the module generate.
  */]
 [module generate('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+
 [import org::eclipse::acceleo::module::model2play::entity::files::attributes /]
 
 [**
@@ -11,9 +13,12 @@
  */]
 [template public generateElement(myEntity : Entity)]
 [comment @main/]
-[file (myEntity.name.concat('Model.java'), false, 'UTF-8')]
+[file ('app/models/'.concat(myEntity.name.concat('Model.java')), false, 'UTF-8')]
+package models;
 
-public class [myEntity.name/] extends Model {
+import play.db.ebean.Model;
+
+public class [myEntity.name/]Model extends Model {
 
 [for(myEntity.attributes)]
 	[comment Call the file block in 'attributes' /]
