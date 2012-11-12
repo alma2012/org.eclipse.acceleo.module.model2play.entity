@@ -4,17 +4,16 @@
  */]
 [module attributes('http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
 
-[comment Le fichier pointe par l'import a pas ete ajoute par git apparement/]
-
 [**
  * The documentation of the template generateElement.
  * @param anAttribute
  */]
 [template public genAttributes(anAttribute : Attribute)]
 
-[for( am : Annotation | anAttribute.metadatas.metadatas->filter(Annotation) )]
-[am.title/] -> [am._body/]
-[/for]
-public String [anAttribute.name/];
+
+[if(anAttribute.isPrimaryKey)]
+@Id
+[/if]
+public [anAttribute.type.name/] [anAttribute.name/];
 
 [/template]

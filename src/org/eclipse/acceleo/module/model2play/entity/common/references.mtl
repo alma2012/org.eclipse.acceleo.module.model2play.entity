@@ -1,0 +1,30 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module attributes.
+ */]
+[module references('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+[template public genReferenceType(aReference : Reference)]
+[if(aReference.multiplicity.toString() = '0..*')]List<[aReference.type.name/]>[else][aReference.type.name/][/if]
+[/template]
+
+[template public genReferencejoin(aReference : Reference)]
+@JoinColumn(name = "ref_[aReference.type.name.toLower()/]", referencedColumnName = "id", insertable = true, updatable = false)
+[if(aReference.multiplicity.toString() = '0..*')]
+@OneToMany
+[elseif(aReference.multiplicity.toString() = '*..1')]
+@ManyToOne(optional = false)
+[/if]
+[/template]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aReference
+ */]
+[template public genReferences(aReference : Reference)]
+
+[genReferencejoin()/]
+public [genReferenceType()/] [aReference.name/];
+
+[/template]
