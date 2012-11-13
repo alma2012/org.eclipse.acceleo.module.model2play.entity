@@ -1,0 +1,8 @@
+
+[module importsEntity('http://www.obeonetwork.org/dsl/entity/2.0.0')]
+
+[template public generateImports(myEntity : Entity)]
+// Imports
+
+
+[/template]
