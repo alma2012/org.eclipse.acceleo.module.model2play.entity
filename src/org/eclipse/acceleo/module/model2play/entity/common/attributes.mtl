@@ -9,7 +9,7 @@
  * The documentation of the template generateElement.
  * @param anAttribute
  */]
-[template public genAttributes(anAttribute : Attribute)]
+[template public generateAttributes(anAttribute : Attribute)]
 
 
 
@@ -17,8 +17,9 @@
 @Id
 [/if]
 [for (annotation : Annotation | anAttribute.metadatas.metadatas->filter(Annotation))]
-@[annotation.title/]
+@Constraints.[annotation.title/]
+[comment A eclaircir/]
 [/for]
-public [anAttribute.type.name/] [anAttribute.name/];
+public [anAttribute.type.name/] [anAttribute.name.replace(' ', '_')/];
 
 [/template]

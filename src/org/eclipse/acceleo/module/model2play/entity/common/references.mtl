@@ -5,7 +5,7 @@
 [module references('http://www.obeonetwork.org/dsl/entity/2.0.0')]
 
 [template public genReferenceType(aReference : Reference)]
-[if(aReference.multiplicity.toString() = '0..*')]List<[aReference.type.name/]>[else][aReference.type.name/][/if]
+[if(aReference.multiplicity.toString() = '0..*')]List<[aReference.type.name/]Model>[else][aReference.type.name/]Model[/if]
 [/template]
 
 [template public genReferencejoin(aReference : Reference)]
@@ -22,7 +22,7 @@
  * The documentation of the template generateElement.
  * @param aReference
  */]
-[template public genReferences(aReference : Reference)]
+[template public generateReferences(aReference : Reference)]
 
 [genReferencejoin()/]
 public [genReferenceType()/] [aReference.name/];
