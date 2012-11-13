@@ -29,7 +29,7 @@ import play.db.ebean.Model.Finder;
 
 [comment Other Models/]
 [for( aRef : Reference | myEntity.references)]
-import [get_package_name()/].[aRef.get_type_name()/];
+import [g_package_name()/].[aRef.get_type_name()/];
 [/for]
 
 [/template]

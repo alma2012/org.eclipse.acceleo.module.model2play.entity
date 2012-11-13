@@ -6,14 +6,16 @@
 [module requests('http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
 
 [comment : Variables "globales"/]
-[query public get_package_name() : String = 'models' /]
+[query public g_package_name() : String = 'models' /]
+[query public g_name_suffix() : String = '' /]
+
 
 [comment : Pour tout ce qui est conventions de nommage /]
 [query public get_type_name(anAttribute : Attribute) : String = 
-anAttribute.type.name
+anAttribute.type.name + g_name_suffix()
 /]
 [query public get_type_name(aReference : Reference) : String = 
-aReference.type.name + 'Model'
+aReference.type.name + g_name_suffix()
 /]
 [query public get_ref_name(aReference : Reference) : String = 
 aReference.type.name.toLower()

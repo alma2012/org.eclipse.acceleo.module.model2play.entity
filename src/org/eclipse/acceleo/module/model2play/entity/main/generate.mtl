@@ -17,8 +17,8 @@
 [comment @main/]
 
 [for( myEntity : Entity | myBlock.entities)]
-[file ('app/models/'.concat(myEntity.name.concat('Model.java')), false, 'UTF-8')]
-package [get_package_name()/];
+[file ('app/models/'.concat(myEntity.name).concat(g_name_suffix()).concat('.java'), false, 'UTF-8')]
+package [g_package_name()/];
 
 
 [comment TODO : refactoring/]
@@ -26,7 +26,7 @@ package [get_package_name()/];
 [myEntity.generateImports()/]
 
 @Entity
-public class [myEntity.name/]Model extends Model {
+public class [name/][g_name_suffix()/] extends Model {
 
 [comment trouver un moyen savoir si un des attributs est une PK /]
 [if (false)]
