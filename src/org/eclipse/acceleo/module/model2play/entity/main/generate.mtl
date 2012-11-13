@@ -7,6 +7,7 @@
 [import org::eclipse::acceleo::module::model2play::entity::common::references /]
 [import org::eclipse::acceleo::module::model2play::entity::common::importsEntity /]
 
+[import org::eclipse::acceleo::module::model2play::entity::requests::requests/]
 
 [**
  * The documentation of the template generateElement.
@@ -17,7 +18,7 @@
 
 [for( myEntity : Entity | myBlock.entities)]
 [file ('app/models/'.concat(myEntity.name.concat('Model.java')), false, 'UTF-8')]
-package models;
+package [get_package_name()/];
 
 
 [comment TODO : refactoring/]

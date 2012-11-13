@@ -5,11 +5,30 @@
 
 [module requests('http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
 
+[comment : Variables "globales"/]
+[query public get_package_name() : String = 'models' /]
+
+[comment : Pour tout ce qui est conventions de nommage /]
+[query public get_type_name(anAttribute : Attribute) : String = 
+anAttribute.type.name
+/]
+[query public get_type_name(aReference : Reference) : String = 
+aReference.type.name + 'Model'
+/]
+[query public get_ref_name(aReference : Reference) : String = 
+aReference.type.name.toLower()
+/]
+[comment end conventions de nommage /]
 
 [**
  * The documentation of the query isFile.
  * @param aWidget
  */]
+
+[query public is_one_to_many(aReference : Reference) : Boolean = 
+aReference.multiplicity.toString().contains('..*')
+/]
+
 
 [comment this one probably useless/]
 [query public isPrimaryKey(anAttribute : Attribute) : Boolean = 
@@ -18,10 +37,10 @@ anAttribute.isPrimaryKey()
 
 
 
-[comment Récupère l'annotation avec la clé TOTO /]
+
 [query public getAnnotationToto(object : ObeoDSMObject) : Annotation = getAnnotation(object, 'TOTO') /]
 
-[comment Récupère l'annotation avec la clé spécifiée en entrée /]
+[comment PAS D'ACCENTS /]
 [query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
 object.metadatas.metadatas->filter(Annotation)->select(title = key)->first()
 /]

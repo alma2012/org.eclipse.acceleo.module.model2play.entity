@@ -1,6 +1,9 @@
 
 [module importsEntity('http://www.obeonetwork.org/dsl/entity/2.0.0')]
 
+[import org::eclipse::acceleo::module::model2play::entity::requests::requests/]
+
+
 [template public generateImports(myEntity : Entity)]
 // Imports
 [comment STUB/]
@@ -25,8 +28,8 @@ import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 
 [comment Other Models/]
-[for(myEntity.references->filter(Entity))]
-import [name/]Model;
+[for( aRef : Reference | myEntity.references)]
+import [get_package_name()/].[aRef.get_type_name()/];
 [/for]
 
 [/template]
