@@ -1,0 +1,27 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module requests.
+ */]
+
+[module requests('http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
+
+
+[**
+ * The documentation of the query isFile.
+ * @param aWidget
+ */]
+
+[comment this one probably useless/]
+[query public isPrimaryKey(anAttribute : Attribute) : Boolean = 
+anAttribute.isPrimaryKey()
+/]
+
+
+
+[comment Récupère l'annotation avec la clé TOTO /]
+[query public getAnnotationToto(object : ObeoDSMObject) : Annotation = getAnnotation(object, 'TOTO') /]
+
+[comment Récupère l'annotation avec la clé spécifiée en entrée /]
+[query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
+object.metadatas.metadatas->filter(Annotation)->select(title = key)->first()
+/]
