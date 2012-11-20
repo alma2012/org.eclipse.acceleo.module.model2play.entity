@@ -17,7 +17,7 @@
 [comment @main/]
 
 [for( myEntity : Entity | myBlock.entities)]
-[file ('app/models/'.concat(myEntity.name).concat(g_name_suffix()).concat('.java'), false, 'UTF-8')]
+[file ('app/models/ '+ myEntity.name + g_name_suffix() + '.java', false, 'UTF-8')]
 package [g_package_name()/];
 
 

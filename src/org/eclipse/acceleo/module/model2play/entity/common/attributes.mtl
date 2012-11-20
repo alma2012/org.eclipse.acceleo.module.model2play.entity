@@ -20,6 +20,6 @@
 @Constraints.[annotation.title/]
 [comment A eclaircir/]
 [/for]
-public [anAttribute.get_type_name()/] [anAttribute.name.replace(' ', '_')/];
+public [anAttribute.get_type_name()/] [anAttribute.name.replace(' ', '_').toLower()/];
 
 [/template]
