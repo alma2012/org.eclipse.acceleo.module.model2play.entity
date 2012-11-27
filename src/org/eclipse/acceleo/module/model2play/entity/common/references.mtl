@@ -13,9 +13,9 @@
 [template public genReferencejoin(aReference : Reference)]
 @JoinColumn(name = "[aReference.get_ref_name()/]", referencedColumnName = "id", insertable = true, updatable = false)
 [if(aReference.is_one_to_many())]
-@OneToMany
-[elseif(aReference.multiplicity.toString() = '*..1')]
 @ManyToOne(optional = false)
+[elseif(aReference.multiplicity.toString() = '*..1')]
+@OneToMany
 [/if]
 [/template]
 

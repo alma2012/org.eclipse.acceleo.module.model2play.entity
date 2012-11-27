@@ -9,10 +9,7 @@
  * The documentation of the template generateElement.
  * @param anAttribute
  */]
-[template public generateAttributes(anAttribute : Attribute)]
-
-
-
+[template public generateAttribute(anAttribute : Attribute)]
 [if(anAttribute.isPrimaryKey)]
 @Id
 [/if]
@@ -21,5 +18,4 @@
 [comment A eclaircir/]
 [/for]
 public [anAttribute.get_type_name()/] [anAttribute.name.replace(' ', '_').toLower()/];
-
 [/template]

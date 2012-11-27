@@ -29,7 +29,7 @@ package [g_package_name()/];
 public class [name/][g_name_suffix()/] extends Model {
 
 [comment trouver un moyen savoir si un des attributs est une PK /]
-[if (false)]
+[if (true)]
 @Id
 @Constraints.Min(10)
 public Long id;
@@ -37,7 +37,7 @@ public Long id;
 
 [for(myEntity.attributes)]
 	[comment Call the file block in 'attributes' /]
-	[ generateAttributes() /]
+	[ generateAttribute() /]
 [/for]
 
 [for(myEntity.references)]
@@ -45,8 +45,15 @@ public Long id;
 	[ generateReferences() /]
 [/for]
 
+// Default ctor
+public [name/]() {}
 
-};
+// Default finder
+public static Finder<Long,[name/][g_name_suffix()/]> find = new Finder<Long,[name/][g_name_suffix()/]>(
+	    Long.class, [name/][g_name_suffix()/].class
+);
+
+}
 [/file]
 [/for]
 [/template]
