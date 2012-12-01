@@ -6,8 +6,8 @@
 [import org::eclipse::acceleo::module::model2play::entity::common::attributes /]
 [import org::eclipse::acceleo::module::model2play::entity::common::references /]
 [import org::eclipse::acceleo::module::model2play::entity::common::importsEntity /]
-
 [import org::eclipse::acceleo::module::model2play::entity::requests::requests/]
+[import org::eclipse::acceleo::module::model2play::entity::services::EntityServices/]
 
 [**
  * The documentation of the template generateElement.
@@ -16,17 +16,23 @@
 [template public generateElement(myBlock : Block)]
 [comment @main/]
 
+[comment unzip bootstrap files TODO /]
+[unzip('thepath but i dont know wich one yeeet')/]
+
+
 [for( myEntity : Entity | myBlock.entities)]
 [file ('app/models/'+ myEntity.name + g_name_suffix() + '.java', false, 'UTF-8')]
-package [g_package_name()/];
 
+package [g_package_name()/]
 
 [comment TODO : refactoring/]
+
 
 [myEntity.generateImports()/]
 
 @Entity
 public class [name/][g_name_suffix()/] extends Model {
+
 
 [comment trouver un moyen savoir si un des attributs est une PK /]
 [if (true)]
