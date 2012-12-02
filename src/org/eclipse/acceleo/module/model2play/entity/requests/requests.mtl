@@ -6,8 +6,8 @@
 [module requests('http://www.obeonetwork.org/dsl/entity/2.0.0','http://www.obeonetwork.org/dsl/environment/2.0.0')]
 
 [comment : Variables "globales"/]
-[query public g_package_name(anOCLANY : OclAny) : String = 'models' /]
-[query public g_name_suffix(anOCLANY : OclAny)  : String = '' /]
+[query public g_package_name( nothing : OclAny) : String = 'models' /]
+[query public g_name_suffix( nothing : OclAny)  : String = '' /]
 
 
 [comment : Pour tout ce qui est conventions de nommage /]
