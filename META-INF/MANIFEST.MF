@@ -20,5 +20,8 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: org.eclipse.acceleo.module.model2play.entity.main
+Export-Package: org.eclipse.acceleo.module.model2play.entity,
+ org.eclipse.acceleo.module.model2play.entity.files,
+ org.eclipse.acceleo.module.model2play.entity.main,
+ org.eclipse.acceleo.module.model2play.entity.services
 
