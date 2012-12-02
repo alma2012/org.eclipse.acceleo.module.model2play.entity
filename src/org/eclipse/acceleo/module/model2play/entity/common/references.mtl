@@ -16,6 +16,8 @@
 @ManyToOne(optional = false)
 [elseif(aReference.multiplicity.toString() = '*..1')]
 @OneToMany
+[else]
+@OneToOne
 [/if]
 [/template]
 

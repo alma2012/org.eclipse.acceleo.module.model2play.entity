@@ -20,7 +20,7 @@
 [comment @main/]
 
 [comment unzip bootstrap files TODO /]
-[unzip('thepath but i dont know wich one yeeet')/]
+[unzip('public')/]
 
 
 [for( myEntity : Entity | myBlock.entities)]

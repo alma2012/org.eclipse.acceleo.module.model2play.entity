@@ -34,11 +34,10 @@ public class EntityServices {
 
 		Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
 		URL fileURL = FileLocator.find(bundle, new Path(
-				"/bootstrap/bootstrap.zip"), null);
+				"bootstrap/bootstrap.zip"), null);
 
 		// ////////!!!!!!TODO
-		File file = new File(
-				"/home/alain/tools/ObeoDesigner/workspace/org.eclipse.acceleo.module.model2play.entity/src-gen/");
+		File file = new File(path+"/");
 		try {
 			unzip(fileURL, file);
 		} catch (Exception e) {
