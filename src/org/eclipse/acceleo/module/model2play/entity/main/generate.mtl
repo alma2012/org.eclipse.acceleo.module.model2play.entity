@@ -6,6 +6,7 @@
 [import org::eclipse::acceleo::module::model2play::entity::common::attributes /]
 [import org::eclipse::acceleo::module::model2play::entity::common::references /]
 [import org::eclipse::acceleo::module::model2play::entity::common::importsEntity /]
+[import org::eclipse::acceleo::module::model2play::entity::common::finder /]
 
 [import org::eclipse::acceleo::module::model2play::entity::requests::requests/]
 
@@ -45,15 +46,22 @@ public Long id;
 	[ generateReferences() /]
 [/for]
 
-// Default ctor
-public [name/]() {}
+	// Default ctor
+	public [name/]() {}
 
-// Default finder
-public static Finder<Long,[name/][g_name_suffix()/]> find = new Finder<Long,[name/][g_name_suffix()/]>(
-	    Long.class, [name/][g_name_suffix()/].class
-);
+	// Default finder
+	public static Finder<Long,[name/][g_name_suffix()/]> find = new Finder<Long,[name/][g_name_suffix()/]>(
+		    Long.class, [name/][g_name_suffix()/].class
+	);
+
+[for(ownedFinders)]
+	[generateFinder()/]
+[/for]
 
 }
+
+
+
 [/file]
 [/for]
 [/template]

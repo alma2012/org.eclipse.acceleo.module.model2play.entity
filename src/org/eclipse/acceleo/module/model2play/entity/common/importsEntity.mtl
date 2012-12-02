@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.validation.Constraint;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.ExpressionList;
 
 import play.data.format.*;
 import play.data.validation.*;

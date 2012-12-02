@@ -38,11 +38,34 @@ anAttribute.isPrimaryKey()
 /]
 
 
+[query public getCriterionTypename( aCriterion : Criterion ) : String =
+if aCriterion.oclIsTypeOf(InternalCriterion) then
+aCriterion.oclAsType(InternalCriterion).target.type.name
+else
+aCriterion.oclAsType(ExternalCriterion).type.name
+endif
+/]
 
+[query public getCriterionName( aCriterion : Criterion ) : String =
+if aCriterion.oclIsTypeOf(InternalCriterion) then
+aCriterion.oclAsType(InternalCriterion).target.name
+else
+aCriterion.oclAsType(ExternalCriterion).name
+endif
+/]
 
 [query public getAnnotationToto(object : ObeoDSMObject) : Annotation = getAnnotation(object, 'TOTO') /]
 
 [comment PAS D'ACCENTS /]
 [query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
 object.metadatas.metadatas->filter(Annotation)->select(title = key)->first()
+/]
+
+[query public hasAnnotationWithValue(object : ObeoDSMObject, key : String, value : String) : Boolean =
+if not getAnnotation(key).oclIsUndefined() then
+getAnnotation(key)._body = value
+else
+false
+endif
+
 /]
