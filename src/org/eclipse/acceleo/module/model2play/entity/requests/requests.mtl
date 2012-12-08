@@ -52,12 +52,13 @@ endif
 not object.metadatas->isEmpty()
 /]
 
-[query public getAnnotationToto(object : ObeoDSMObject) : Annotation = getAnnotation(object, 'TOTO') /]
+[query public containsAnnotations( object : ObeoDSMObject ) : Boolean =
+hasMetadata() and getMetadata()->filter(Annotation)->notEmpty()
+/]
 
-[comment PAS D'ACCENTS /]
-[query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
-if containsAnnotations() then
-getAnnotations()->select(title = key)->first()
+[query public getMetadata( object : ObeoDSMObject ) : Set(MetaData) =
+if hasMetadata() then 
+object.metadatas.metadatas
 else
 null
 endif
@@ -71,18 +72,24 @@ null
 endif
 /]
 
-[query public containsAnnotations( object : ObeoDSMObject ) : Boolean =
-not getAnnotations()->isEmpty()
-/]
+
 
 [query public hasAnnotation(object : ObeoDSMObject, key : String ) : Boolean =
-if getAnnotation(key).oclIsUndefined() then
-false
-else
+if hasMetadata() and getAnnotations()->select(title = key)->notEmpty() then
 true
+else
+false
 endif
-
 /]
+
+[query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
+if hasAnnotation(key) then
+getAnnotations()->select(title = key)->first()
+else
+null
+endif
+/]
+
 [query public hasAnnotationWithValue(object : ObeoDSMObject, key : String, value : String) : Boolean =
 if hasAnnotation(key) then
 getAnnotation(key)._body.equalsIgnoreCase(value)
