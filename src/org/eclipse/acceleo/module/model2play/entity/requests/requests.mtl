@@ -32,12 +32,6 @@ aReference.multiplicity.toString().contains('..*')
 /]
 
 
-[comment this one probably useless/]
-[query public isPrimaryKey(anAttribute : Attribute) : Boolean = 
-anAttribute.isPrimaryKey()
-/]
-
-
 [query public getCriterionTypename( aCriterion : Criterion ) : String =
 if aCriterion.oclIsTypeOf(InternalCriterion) then
 aCriterion.oclAsType(InternalCriterion).target.type.name
@@ -54,16 +48,44 @@ aCriterion.oclAsType(ExternalCriterion).name
 endif
 /]
 
+[query public hasMetadata( object : ObeoDSMObject ) : Boolean =
+not object.metadatas->isEmpty()
+/]
+
 [query public getAnnotationToto(object : ObeoDSMObject) : Annotation = getAnnotation(object, 'TOTO') /]
 
 [comment PAS D'ACCENTS /]
 [query public getAnnotation(object : ObeoDSMObject, key : String) : Annotation =
-object.metadatas.metadatas->filter(Annotation)->select(title = key)->first()
+if containsAnnotations() then
+getAnnotations()->select(title = key)->first()
+else
+null
+endif
 /]
 
+[query public getAnnotations( object : ObeoDSMObject ) : OrderedSet(Annotation) =
+if hasMetadata() then
+object.metadatas.metadatas->filter(Annotation)->asOrderedSet()
+else
+null
+endif
+/]
+
+[query public containsAnnotations( object : ObeoDSMObject ) : Boolean =
+not getAnnotations()->isEmpty()
+/]
+
+[query public hasAnnotation(object : ObeoDSMObject, key : String ) : Boolean =
+if getAnnotation(key).oclIsUndefined() then
+false
+else
+true
+endif
+
+/]
 [query public hasAnnotationWithValue(object : ObeoDSMObject, key : String, value : String) : Boolean =
-if not getAnnotation(key).oclIsUndefined() then
-getAnnotation(key)._body = value
+if hasAnnotation(key) then
+getAnnotation(key)._body.equalsIgnoreCase(value)
 else
 false
 endif

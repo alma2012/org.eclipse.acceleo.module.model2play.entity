@@ -13,9 +13,8 @@
 [if(anAttribute.isPrimaryKey)]
 @Id
 [/if]
-[for (annotation : Annotation | anAttribute.metadatas.metadatas->filter(Annotation))]
-@Constraints.[annotation.title/]
-[comment A eclaircir/]
-[/for]
+[if ( hasAnnotation('required') and not( hasAnnotationWithValue('required','false') or hasAnnotationWithValue('required','0') ) )] 
+@Constraints.Required
+[/if]
 public [anAttribute.get_type_name()/] [anAttribute.name.replace(' ', '_').toLower()/];
 [/template]
